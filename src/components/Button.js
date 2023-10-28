@@ -24,21 +24,12 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
   };
 
   React.useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (power) {
-        if (e.key === audioRef.current.id.toLowerCase()) {
-          playSound();
-        }
-      }
-    };
-  
     document.addEventListener("keydown", handleKeyPress);
-  
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [power]);
-  
+  }, [power, playSound]);
+
   return (
     <div id={name} className={`${styles.drumpad} ${hit ? "active" : ""}`} onClick={playSound}>
       <audio className="clip" ref={audioRef} id={keyTrigger} src={src}></audio>
