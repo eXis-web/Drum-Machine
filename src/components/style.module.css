@@ -22,8 +22,8 @@
 .drumpad {
   display: grid;
   place-content: center;
-  background: linear-gradient(150deg, #f0f0f0, #cacaca);
-  box-shadow: 20px 20px 65px #bebebe;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 20px 20px 60px #bebebe;
   font-family: inherit;
   font-size: 2rem;
   font-weight: 800;
