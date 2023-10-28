@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from "./style.module.css";
 
 function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
@@ -15,20 +15,20 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = useCallback((e) => {
     if (power) {
       if (e.key === audioRef.current.id.toLowerCase()) {
         playSound();
       }
     }
-  };
+  }, [power, playSound]);
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [power, handleKeyPress]); // Включаємо handleKeyPress до списку залежностей
+  }, [handleKeyPress, power, playSound]);
 
   return (
     <div id={name} className={`${styles.drumpad} ${hit ? "active" : ""}`} onClick={playSound}>
