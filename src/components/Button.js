@@ -28,7 +28,7 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [power, playSound]);
+  }, [power, handleKeyPress]); // Включаємо handleKeyPress до списку залежностей
 
   return (
     <div id={name} className={`${styles.drumpad} ${hit ? "active" : ""}`} onClick={playSound}>
