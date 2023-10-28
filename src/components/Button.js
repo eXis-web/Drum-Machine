@@ -5,7 +5,7 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
   const [hit, setHit] = React.useState(false);
   const audioRef = React.useRef();
 
-  const playSound = () => {
+  const playSound = useCallback(() => {
     setHit(true);
     setTimeout(() => setHit(false), 100);
     if (power) {
@@ -13,7 +13,7 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
       audioRef.current.play();
       setDisplayText(name.replace(/[-]/g, " "));
     }
-  };
+  }, [power, setDisplayText, name, volume]);
 
   const handleKeyPress = useCallback((e) => {
     if (power) {
@@ -28,7 +28,7 @@ function Button({ name, src, keyTrigger, setDisplayText, volume, power }) {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleKeyPress, power, playSound]);
+  }, [handleKeyPress, power]);
 
   return (
     <div id={name} className={`${styles.drumpad} ${hit ? "active" : ""}`} onClick={playSound}>
